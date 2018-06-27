@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import AddResult from './components/AddResult';
 import Table from './components/Table';
+import GoalDifferenceChart from './components/GoalDifferenceChart';
 
 const data = [
   { name: "Arsenal", F: 79, A: 36, Pts: 87 },
@@ -135,15 +136,7 @@ class App extends Component {
             </Table>
           </div>
           <div className="column">
-            <h2 className="title is-4">Goal difference</h2>
-            <BarChart width={800} height={400} data={this.state.data} margin={{ top: 20, right: 0, bottom: 60, left: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip />
-              <Legend />
-              <Bar dataKey="difference" name="Difference" fill="#1e98fc" />
-            </BarChart>
+            <GoalDifferenceChart data={this.state.data} />
             <h2 className="title is-4">Goals for, Goals against, Difference, and Points</h2>
             <LineChart width={800} height={400} data={this.state.data} margin={{ top: 20, right: 0, bottom: 60, left: 0 }}>
               <CartesianGrid strokeDasharray="3 3" />
