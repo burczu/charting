@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 const data = [
   { name: "Arsenal", F: 79, A: 36, Pts: 87 },
@@ -24,15 +25,26 @@ const data = [
 ];
 
 class App extends Component {
+  state = { data: data.map((item) => ({ ...item, difference: item.F - item.A })) };
+
   renderTeams() {
-    return data.map((result, idx) => (
-      <tr key={idx}>
-        <td>{result.name}</td>
-        <td>{result.F}</td>
-        <td>{result.A}</td>
-        <td>{result.Pts}</td>
-      </tr>
-    ));
+    const minValue = this.state.data.reduce((min, next) => Math.min(min, next.difference), this.state.data[0].difference);
+
+    return this.state.data.map((result, idx) => {
+      let style = {};
+      if (result.difference === minValue) {
+        style = {background: '#ffd182'};
+      }
+
+      return (
+        <tr key={idx} style={style}>
+          <td>{result.name}</td>
+          <td>{result.F}</td>
+          <td>{result.A}</td>
+          <td>{result.Pts}</td>
+        </tr>
+      );
+    });
   }
 
   render() {
@@ -109,7 +121,15 @@ class App extends Component {
             </table>
           </div>
           <div className="column">
-            TODO: add chart with for / against difference<br />
+            <h2 className="title">Goal difference</h2>
+            <BarChart width={600} height={300} data={this.state.data}>
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="name" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="difference" fill="#1e98fc" />
+            </BarChart>
             TODO: add chart with points results
           </div>
         </div>
