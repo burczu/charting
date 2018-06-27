@@ -86,7 +86,7 @@ class App extends Component {
     const { value } = event.currentTarget;
 
     if (this.isNumber(value)) {
-      this.setState({newAgainst: value});
+      this.setState({ newAgainst: value });
     }
   };
 
@@ -94,7 +94,7 @@ class App extends Component {
     const { value } = event.currentTarget;
 
     if (this.isNumber(value)) {
-      this.setState({newPoints: value});
+      this.setState({ newPoints: value });
     }
   };
 
