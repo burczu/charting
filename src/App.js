@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import AddResult from './components/AddResult';
+import Table from './components/Table';
 
 const data = [
   { name: "Arsenal", F: 79, A: 36, Pts: 87 },
@@ -129,17 +130,9 @@ class App extends Component {
                        onNewPointsChange={this.onNewPointsChange}
                        onAddResult={this.onAddResult}
             />
-            <table className="table">
-              <thead>
-                <tr>
-                  <th>Team</th>
-                  <th>Goals for</th>
-                  <th>Goals against</th>
-                  <th>Points</th>
-                </tr>
-              </thead>
-              <tbody>{this.renderTeams()}</tbody>
-            </table>
+            <Table>
+              {this.renderTeams()}
+            </Table>
           </div>
           <div className="column">
             <h2 className="title is-4">Goal difference</h2>

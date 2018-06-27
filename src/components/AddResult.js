@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const AddResult = (props) => {
   return [
-    <div className="columns">
+    <div className="columns" key="inputs">
       <div className="column">
         <div className="field">
           <label className="label">Name</label>
@@ -61,7 +61,7 @@ const AddResult = (props) => {
         </div>
       </div>
     </div>,
-    <button className="button is-link" onClick={props.onAddResult}>Add result</button>
+    <button key="button" className="button is-link" onClick={props.onAddResult}>Add result</button>
   ];
 };
 
