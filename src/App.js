@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BarChart, LineChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import AddResult from './components/AddResult';
 
 const data = [
   { name: "Arsenal", F: 79, A: 36, Pts: 87 },
@@ -33,7 +34,7 @@ class App extends Component {
     newPoints: ''
   };
 
-  renderTeams() {
+  renderTeams = () => {
     const minValue = this.state.data.reduce((min, next) => Math.min(min, next.difference), this.state.data[0].difference);
 
     return this.state.data.map((result, idx) => {
@@ -51,7 +52,7 @@ class App extends Component {
         </tr>
       );
     });
-  }
+  };
 
   isString = (value) => {
     const parsed = Number.parseInt(value, 10);
@@ -118,66 +119,16 @@ class App extends Component {
         </p>
         <div className="columns">
           <div className="column">
-            <div className="columns">
-              <div className="column">
-                <div className="field">
-                  <label className="label">Name</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Text input"
-                      value={this.state.newName}
-                      onChange={this.onNewNameChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="column">
-                <div className="field">
-                  <label className="label">For</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Text input"
-                      value={this.state.newFor}
-                      onChange={this.onNewForChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="column">
-                <div className="field">
-                  <label className="label">Against</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Text input"
-                      value={this.state.newAgainst}
-                      onChange={this.onNewAgainstChange}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="column">
-                <div className="field">
-                  <label className="label">Points</label>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      placeholder="Text input"
-                      value={this.state.newPoints}
-                      onChange={this.onNewPointsChange}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <button className="button is-link" onClick={this.onAddResult}>Add result</button>
-
+            <AddResult newName={this.state.newName}
+                       newFor={this.state.newFor}
+                       newAgainst={this.state.newAgainst}
+                       newPoints={this.state.newPoints}
+                       onNewNameChange={this.onNewNameChange}
+                       onNewForChange={this.onNewForChange}
+                       onNewAgainstChange={this.onNewAgainstChange}
+                       onNewPointsChange={this.onNewPointsChange}
+                       onAddResult={this.onAddResult}
+            />
             <table className="table">
               <thead>
                 <tr>
