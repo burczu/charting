@@ -25,7 +25,13 @@ const data = [
 ];
 
 class App extends Component {
-  state = { data: data.map((item) => ({ ...item, difference: item.F - item.A })) };
+  state = {
+    data: data.map((item) => ({ ...item, difference: item.F - item.A })),
+    newName: '',
+    newFor: '',
+    newAgainst: '',
+    newPoints: ''
+  };
 
   renderTeams() {
     const minValue = this.state.data.reduce((min, next) => Math.min(min, next.difference), this.state.data[0].difference);
@@ -47,6 +53,62 @@ class App extends Component {
     });
   }
 
+  isString = (value) => {
+    const parsed = Number.parseInt(value, 10);
+    return Number.isNaN(parsed)
+  };
+
+  isNumber = (value) => {
+    const parsed = Number.parseInt(value, 10);
+    return value === '' || Number.isNaN(parsed) === false;
+  };
+
+  onNewNameChange = (event) => {
+    const { value } = event.currentTarget;
+
+    if (this.isString(value)) {
+      this.setState({ newName: value });
+    }
+  };
+
+  onNewForChange = (event) => {
+    const { value } = event.currentTarget;
+
+    if (this.isNumber(value)) {
+      this.setState({ newFor: value });
+    }
+  };
+
+  onNewAgainstChange = (event) => {
+    const { value } = event.currentTarget;
+
+    if (this.isNumber(value)) {
+      this.setState({newAgainst: value});
+    }
+  };
+
+  onNewPointsChange = (event) => {
+    const { value } = event.currentTarget;
+
+    if (this.isNumber(value)) {
+      this.setState({newPoints: value});
+    }
+  };
+
+  onAddResult = () => {
+    const { newName, newFor, newAgainst, newPoints } = this.state;
+
+    if (newName !== '' && newFor !== '' && newAgainst !== '' && newPoints !== '') {
+      this.setState({
+        data: [...this.state.data, { name: newName, F: newFor, A: newAgainst, Pts: newPoints, difference: newFor - newAgainst }],
+        newName: '',
+        newFor: '',
+        newAgainst: '',
+        newPoints: ''
+      });
+    }
+  };
+
   render() {
     return (
       <section className="section">
@@ -65,6 +127,8 @@ class App extends Component {
                       className="input"
                       type="text"
                       placeholder="Text input"
+                      value={this.state.newName}
+                      onChange={this.onNewNameChange}
                     />
                   </div>
                 </div>
@@ -77,6 +141,8 @@ class App extends Component {
                       className="input"
                       type="text"
                       placeholder="Text input"
+                      value={this.state.newFor}
+                      onChange={this.onNewForChange}
                     />
                   </div>
                 </div>
@@ -89,6 +155,8 @@ class App extends Component {
                       className="input"
                       type="text"
                       placeholder="Text input"
+                      value={this.state.newAgainst}
+                      onChange={this.onNewAgainstChange}
                     />
                   </div>
                 </div>
@@ -101,12 +169,14 @@ class App extends Component {
                       className="input"
                       type="text"
                       placeholder="Text input"
+                      value={this.state.newPoints}
+                      onChange={this.onNewPointsChange}
                     />
                   </div>
                 </div>
               </div>
             </div>
-            <button className="button is-link">Add result</button>
+            <button className="button is-link" onClick={this.onAddResult}>Add result</button>
 
             <table className="table">
               <thead>
