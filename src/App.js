@@ -7,7 +7,7 @@ import data from './data';
 
 class App extends Component {
   state = {
-    data: data.map((item) => ({ ...item, difference: item.F - item.A })),
+    data: data.map((item) => ({ ...item, difference: Math.abs(item.F - item.A) })),
     newName: '',
     newFor: '',
     newAgainst: '',
@@ -82,7 +82,7 @@ class App extends Component {
 
     if (newName !== '' && newFor !== '' && newAgainst !== '' && newPoints !== '') {
       this.setState({
-        data: [...this.state.data, { name: newName, F: newFor, A: newAgainst, Pts: newPoints, difference: newFor - newAgainst }],
+        data: [...this.state.data, { name: newName, F: newFor, A: newAgainst, Pts: newPoints, difference: Math.abs(newFor - newAgainst) }],
         newName: '',
         newFor: '',
         newAgainst: '',
