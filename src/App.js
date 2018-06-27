@@ -98,7 +98,8 @@ class App extends Component {
     }
   };
 
-  onAddResult = () => {
+  onAddResult = (event) => {
+    event.preventDefault();
     const { newName, newFor, newAgainst, newPoints } = this.state;
 
     if (newName !== '' && newFor !== '' && newAgainst !== '' && newPoints !== '') {
